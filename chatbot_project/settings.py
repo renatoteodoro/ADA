@@ -1,7 +1,10 @@
 # chatbot_project/settings.py
 
 from pathlib import Path
-import os # Importar os para usar os.path.join
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,7 +18,7 @@ LOGOUT_REDIRECT_URL = '/accounts/login/' # Redireciona para a página de login a
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h^2&%wwl_egwho9&stpzy3zy^8(+qx75_y0zyd1d+15k4o5d=e'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-fallback-only-for-local-dev')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,6 +38,7 @@ INSTALLED_APPS = [
     'chatbot_app',   # Your chatbot app
     'cadastro_app',  # Your cadastro app
     'accounts_app',  # Your accounts app
+    'widget_tweaks',  # <--- Adicione esta linha
 ]
 
 MIDDLEWARE = [
